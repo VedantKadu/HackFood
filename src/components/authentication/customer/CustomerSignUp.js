@@ -40,48 +40,48 @@ const CustomerSignUp = () => {
     }));
   };
 
-  //   const signupHandler = (event) => {
-  //     // console.log(user);
-  //     event.preventDefault();
-  //     fetch("http://localhost:8080/auth/signup", {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         email: user.email,
-  //         password: user.password,
-  //         name: user.rest_name,
-  //         Address: {
-  //           aptName: user.aptName,
-  //           locality: user.locality,
-  //           street: user.street,
-  //           zipcode: user.zipcode,
-  //         },
-  //         Contact: user.Contact,
-  //       }),
-  //     })
-  //       .then((res) => {
-  //         if (res.status === 422) {
-  //           throw new Error(
-  //             "Validation failed. Make sure the email address isn't used yet!"
-  //           );
-  //         }
-  //         if (res.status !== 200 && res.status !== 201) {
-  //           console.log("Error!");
-  //           throw new Error("Creating a user failed!");
-  //         }
-  //         return res.json();
-  //       })
-  //       .then((resData) => {
-  //         // console.log("Successfull");
-  //         dispatch(authenticationActions.setSignUp());
-  //         history.push("/");
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
+    const signupHandler = (event) => {
+      // console.log(user);
+      event.preventDefault();
+      fetch("http://localhost:8080/customer/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user.email,
+          password: user.password,
+          name: user.name,
+          Address: {
+            aptName: user.aptName,
+            locality: user.locality,
+            street: user.street,
+            zipCode: user.zipcode,
+          },
+          Contact: user.Contact,
+        }),
+      })
+        .then((res) => {
+          if (res.status === 422) {
+            throw new Error(
+              "Validation failed. Make sure the email address isn't used yet!"
+            );
+          }
+          if (res.status !== 200 && res.status !== 201) {
+            console.log("Error!");
+            throw new Error("Creating a user failed!");
+          }
+          return res.json();
+        })
+        .then((resData) => {
+          console.log("Successfull",resData);
+          // dispatch(authenticationActions.setSignUp());
+          // history.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
 
   return (
     <div className={styles["Reg-container"]}>
@@ -174,6 +174,7 @@ const CustomerSignUp = () => {
             type="submit"
             variant="contained"
             color="primary"
+            onClick={signupHandler}
             style={{ marginTop: "10px", width: "15%" }}
           >
             Submit

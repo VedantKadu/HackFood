@@ -16,6 +16,38 @@ const CustomerLogIn = () => {
     }));
   };
 
+  const loginHandler = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:8080/customer/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: user.email,
+        password: user.password,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 422) {
+          throw new Error("Validation failed.");
+        }
+        if (res.status !== 200 && res.status !== 201) {
+          console.log("Error!");
+          throw new Error("Could not authenticate you!");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        console.log(resData);
+        localStorage.setItem("customerToken", resData.token);
+        // dispatch(authenticationActions.setLoggedIn());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className={styles.loginform}>
       <h2 className={styles.header}>Login</h2>
@@ -40,7 +72,7 @@ const CustomerLogIn = () => {
             onInput={inputChangeHandler}
           />
         </div>
-        <button className={styles.btn}>Log In </button>
+        <button className={styles.btn} onClick={loginHandler}>Log In </button>
         <div className={styles.signup}>
           don't have an account ? sign up{" "}
           <Link to="/customer/signup">here</Link>
