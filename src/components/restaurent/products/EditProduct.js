@@ -7,11 +7,11 @@ import { Fragment, useState } from "react";
 
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import { FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
+import { Button, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 import { FormLabel } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { ProductsearchActions } from "../../Store/ProductSearch-slice";
+import { ProductsearchActions } from "../../../store/ProductSearch-slice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,13 +29,13 @@ const useStyles = makeStyles((theme) => ({
 
 function EditProduct() {
   const classes = useStyles();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const params = useParams();
   const dispatch = useDispatch();
   const productId = params.productId;
 
   const [product, setProduct] = useState({
-    dish_name: "",
+    dishName: "",
     price: "",
     description: "",
     discount: "",
@@ -44,9 +44,9 @@ function EditProduct() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:8080/products/edit/" + productId, {
+    fetch("http://localhost:8080/restaurent/edit/" + productId, {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem("restaurentToken"),
       },
     })
       .then((res) => {
@@ -58,7 +58,7 @@ function EditProduct() {
       .then((resData) => {
         setProduct((prevState) => ({
           ...prevState,
-          dish_name: resData.product.dish_name,
+          dishName: resData.product.dishName,
           price: resData.product.price,
           discount: resData.product.discount,
           type: resData.product.type,
@@ -72,22 +72,22 @@ function EditProduct() {
   }, [productId]);
 
   const handleBackPress = () => {
-    history.push("/products");
+    navigate("/");
   };
 
   const updateHandler = (e) => {
     e.preventDefault();
-    let url = "http://localhost:8080/products/edit/" + productId;
+    let url = "http://localhost:8080/restaurent/edit/" + productId;
     let method = "PUT";
 
     fetch(url, {
       method: method,
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem("restaurentToken"),
       },
       body: JSON.stringify({
-        dish_name: product.dish_name,
+        dishName: product.dishName,
         price: product.price,
         disprice: product.discount,
         description: product.description,
@@ -102,8 +102,7 @@ function EditProduct() {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData);
-        history.push("/products");
+        navigate("/");
         dispatch(ProductsearchActions.changeReload());
       })
       .catch((err) => {
@@ -128,11 +127,6 @@ function EditProduct() {
           <KeyboardBackspaceIcon fontSize="large" onClick={handleBackPress} />
           <span className={styles["heading"]}>Edit Product</span>
         </div>
-        <div className={styles["btn"]}>
-          <div className={styles["button"]} onClick={updateHandler}>
-            Update
-          </div>
-        </div>
       </header>
 
       <div className={styles["newprod-wrap"]}>
@@ -141,10 +135,10 @@ function EditProduct() {
           <form className={classes.root}>
             <TextField
               name="name"
-              id="dish_name"
+              id="dishName"
               label="Product Name"
               variant="outlined"
-              value={product.dish_name}
+              value={product.dishName}
               onChange={inputChangeHandler}
               fullWidth
               required
@@ -194,6 +188,17 @@ function EditProduct() {
                   label="Non-Veg"
                 />
               </RadioGroup>
+            </div>
+            <div className={styles["btns"]}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                onClick={updateHandler}
+                style={{ marginTop: "10px", width: "50%" }}
+              >
+                Update Product
+              </Button>
             </div>
           </form>
         </div>
