@@ -1,0 +1,7 @@
+.home_wrapper {
+  display: flex;
+  padding: 2% 2%;
+  margin: auto;
+  flex-wrap: wrap;
+  width: 80%;
+}
