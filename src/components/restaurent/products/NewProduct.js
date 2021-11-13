@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./NewProduct.module.css";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Fragment, useState } from "react";
@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 import { FormLabel } from "@mui/material";
-import { ProductsearchActions } from "../../Store/ProductSearch-slice";
+import { ProductsearchActions } from "../../../store/ProductSearch-slice";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,13 +28,13 @@ const useStyles = makeStyles((theme) => ({
 function NewProduct() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // const [url, seturl] = useState("");
   const [name, setName] = useState("");
   const [description, setdescription] = useState("");
   const [price, setprice] = useState("");
-  const [disprice, setdisprice] = useState("");
+  const [discount, setdiscount] = useState("");
   const [type, settype] = useState("");
   // const [status, setstatus] = useState(true);
   // function handleImageChange(e) {
@@ -61,33 +61,25 @@ function NewProduct() {
   // }
 
   const handleBackPress = () => {
-    history.push("/products");
+    navigate("/");
   };
 
   function handleSubmit(event) {
     event.preventDefault();
-    // const formData = {
-    //   dish_name : name,
-    //   price: price,
-    //   disprice: disprice,
-    //   type: type,
-    //   description: description
-    // }
-    // const formData = new FormData();
-    // formData.append('title', name);
-    let url = "http://localhost:8080/products/new-product";
+
+    let url = "http://localhost:8080/restaurent/new-product";
     let method = "POST";
 
     fetch(url, {
       method: method,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("token"),
+        "Authorization": "Bearer " + localStorage.getItem("restaurentToken"),
       },
       body: JSON.stringify({
-        dish_name: name,
+        dishName: name,
         price: price,
-        disprice: disprice,
+        discount: discount,
         description: description,
         type: type,
       }),
@@ -101,7 +93,7 @@ function NewProduct() {
       .then((resData) => {
         console.log(resData);
         dispatch(ProductsearchActions.changeReload());
-        history.push("/products");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -115,9 +107,7 @@ function NewProduct() {
           <KeyboardBackspaceIcon fontSize="large" onClick={handleBackPress} />
           <span className={styles["heading"]}>Add New Product</span>
         </div>
-        <div className={styles["btn"]}>
-          <div className={styles["button"]}>Add Product</div>
-        </div>
+
       </header>
 
       <div className={styles["newprod-wrap"]}>
@@ -152,11 +142,11 @@ function NewProduct() {
                 required
               />
               <TextField
-                name="DisPrice"
-                label="Discounted Price"
-                placeholder="Enter Discounted Price"
+                name="Discount"
+                label="Discount"
+                placeholder="Enter Discount"
                 variant="outlined"
-                onInput={(e) => setdisprice(e.target.value)}
+                onInput={(e) => setdiscount(e.target.value)}
               />
             </div>
             <div className={styles["veg"]}>

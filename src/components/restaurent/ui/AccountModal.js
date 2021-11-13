@@ -4,22 +4,22 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Fragment } from "react";
 import ReactDOM from "react-dom";
-// import { useDispatch } from "react-redux";
-// import { AccountModalActions } from "../../Store/AccountModal-slice";
+import { useDispatch } from "react-redux";
+import { AccountModalActions } from "../../../store/AccountModal-slice";
 import Switch from "./Switch";
-// import { authenticationActions } from "../../Store/Authentication";
-// import { useNavigate } from "react-router";
+import { authSliceActions } from "../../../store/auth-slice";
+import { useNavigate } from "react-router";
 
 const Overley = (props) => {
   const [value, setValue] = React.useState(true);
-  // const dispatch = useDispatch();
-  // const history = useNavigate();
+  const dispatch = useDispatch();
+  const history = useNavigate();
 
-  // const logOutHandler = () => {
-  //   localStorage.removeItem("token");
-  //   dispatch(authenticationActions.setLoggedIn());
-  //   history.push("/");
-  // };
+  const logOutHandler = () => {
+    localStorage.removeItem("restaurentToken");
+    dispatch(authSliceActions.setLoggedIn({loggedIn:false,customer: true}));
+    history("/");
+  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
@@ -37,9 +37,9 @@ const Overley = (props) => {
             <AccountCircleIcon fontSize="large" />
             <p className={styles.text}>My Account </p>
           </div>
-          <div className={styles["main-items"]}>
+          <div className={styles["main-items"]} onClick={logOutHandler}>
             <LogoutIcon fontSize="large" />
-            <p className={styles.text}>Sign Out </p>
+            <p className={styles.text} >Sign Out </p>
           </div>
         </div>
       </div>
@@ -47,9 +47,13 @@ const Overley = (props) => {
   );
 };
 const Backdrop = (props) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  return <div className={styles["backdrop"]}></div>;
+  const AccountModalHandler = () => {
+    dispatch(AccountModalActions.setview());
+  };
+
+  return <div className={styles["backdrop"]} onClick={AccountModalHandler}></div>;
 };
 
 const AccountModal = (props) => {
