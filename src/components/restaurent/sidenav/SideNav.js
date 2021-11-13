@@ -8,7 +8,7 @@ function SideNav() {
   const path = location.pathname;
   let page = "products";
   if (path.includes("orders")) page = "orders";
-  if (path.includes("products")) page = "products";
+  else page = "products";
 
   return (
     <div className={styles["sidenav"]}>
@@ -17,7 +17,8 @@ function SideNav() {
         <ul>
           <li className={page === "products" && styles.active}>
             <NavLink
-              to="/products"
+              to="/"
+              exact
               className={`${
                 page === "products"
                   ? styles["products-link-active"]

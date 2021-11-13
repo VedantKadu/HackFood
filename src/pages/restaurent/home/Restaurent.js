@@ -2,24 +2,32 @@ import React, { Fragment } from "react";
 import SideNav from "../../../components/restaurent/sidenav/SideNav";
 import { Route, Routes } from "react-router";
 import ProductPage from "../products/ProductPage";
-import OrderPage from "../orders/OrderPage";
+// import OrderPage from "../orders/OrderPage";
+
+import styles from "./Restaurent.module.css";
 
 const Restaurent = () => {
   return (
     <Fragment>
-      <SideNav />
-      <Routes>
-        <Route path="/" exact element={<ProductPage />} />
-        <Route path="/orders" exact element={<OrderPage />} />
-        <Route
-          path="*"
-          element={
-            <div>
-              <h1>No page found</h1>
-            </div>
-          }
-        />
-      </Routes>
+      <div className={styles.wrapper}>
+        <header className={styles.header}>
+          <SideNav />
+        </header>
+        <main className={styles.main}>
+          <Routes>
+            <Route path="/" exact element={<ProductPage />} />
+            <Route path="/orders" element={<div>Orders Page</div>} />
+            <Route
+              path="*"
+              element={
+                <div>
+                  <h1>No page found</h1>
+                </div>
+              }
+            />
+          </Routes>
+        </main>
+      </div>
     </Fragment>
   );
 };

@@ -1,17 +1,17 @@
 import styles from "./header.module.css";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import AccountModal from "./AccountModal";
-import { AccountModalActions } from './../../Store/AccountModal-slice'
-import { useDispatch, useSelector } from "react-redux";
+// import AccountModal from "./AccountModal";
+// import { AccountModalActions } from "./../../Store/AccountModal-slice";
+// import { useDispatch } from "react-redux";
 
 function Header(props) {
-  const AccountModalView = useSelector((state) => state.AccountModal.view);
-  const dispatch = useDispatch();
+  // const AccountModalView = useSelector((state) => state.AccountModal.view);
+  // const dispatch = useDispatch();
 
-  const AccountModalHandler = () =>{
-    dispatch(AccountModalActions.setview());
-  }
+  // const AccountModalHandler = () => {
+  //   // dispatch(AccountModalActions.setview());
+  // };
 
   return (
     <header className={styles["header"]}>
@@ -20,10 +20,10 @@ function Header(props) {
         <span>
           <NotificationsIcon fontSize="large" />
         </span>
-        <span onClick={AccountModalHandler}>
-          <AccountCircleIcon fontSize="large"/>
+        <span>
+          <AccountCircleIcon fontSize="large" />
         </span>
-        {AccountModalView && <AccountModal onClick={AccountModalHandler}/>}
+        {/* {AccountModalView && <AccountModal onClick={AccountModalHandler}/>} */}
       </nav>
     </header>
   );

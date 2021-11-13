@@ -1,11 +1,11 @@
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./OrderDetail.module.css";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Fragment } from "react";
 import OrderItem from "./OrderItem";
 
 function OrderDetailPage() {
-  const history = useHistory();
+  const history = useNavigate();
 
   const backPressHandler = () => {
     history.push("/orders");

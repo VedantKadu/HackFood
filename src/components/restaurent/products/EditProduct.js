@@ -1,4 +1,4 @@
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./EditProduct.module.css";
 // import productsList from "./ProductPageItems/DummyProducts";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 function EditProduct() {
   const classes = useStyles();
-  const history = useHistory();
+  const history = useNavigate();
   const params = useParams();
   const dispatch = useDispatch();
   const productId = params.productId;

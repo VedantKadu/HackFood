@@ -1,9 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { authSliceActions } from "../../../store/auth-slice";
 import styles from "./CustomerLogIn.module.css";
 
 const CustomerLogIn = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -18,6 +23,7 @@ const CustomerLogIn = () => {
 
   const loginHandler = (e) => {
     e.preventDefault();
+
     fetch("http://localhost:8080/customer/login", {
       method: "POST",
       headers: {
@@ -41,7 +47,10 @@ const CustomerLogIn = () => {
       .then((resData) => {
         console.log(resData);
         localStorage.setItem("customerToken", resData.token);
-        // dispatch(authenticationActions.setLoggedIn());
+        dispatch(
+          authSliceActions.setLoggedIn({ loggedIn: true, customer: true })
+        );
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -72,7 +81,9 @@ const CustomerLogIn = () => {
             onInput={inputChangeHandler}
           />
         </div>
-        <button className={styles.btn} onClick={loginHandler}>Log In </button>
+        <button className={styles.btn} onClick={loginHandler}>
+          Log In{" "}
+        </button>
         <div className={styles.signup}>
           don't have an account ? sign up{" "}
           <Link to="/customer/signup">here</Link>

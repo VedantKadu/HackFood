@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography } from "@material-ui/core";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +32,7 @@ const CustomerSignUp = () => {
     Contact: "",
   });
   const classes = useStyles();
+  const navigate = useNavigate();
 
   const inputChangeHandler = (event) => {
     setUser((prevState) => ({
@@ -40,48 +41,47 @@ const CustomerSignUp = () => {
     }));
   };
 
-    const signupHandler = (event) => {
-      // console.log(user);
-      event.preventDefault();
-      fetch("http://localhost:8080/customer/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+  const signupHandler = (event) => {
+    // console.log(user);
+    event.preventDefault();
+    fetch("http://localhost:8080/customer/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: user.email,
+        password: user.password,
+        name: user.name,
+        Address: {
+          aptName: user.aptName,
+          locality: user.locality,
+          street: user.street,
+          zipCode: user.zipcode,
         },
-        body: JSON.stringify({
-          email: user.email,
-          password: user.password,
-          name: user.name,
-          Address: {
-            aptName: user.aptName,
-            locality: user.locality,
-            street: user.street,
-            zipCode: user.zipcode,
-          },
-          Contact: user.Contact,
-        }),
+        Contact: user.Contact,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 422) {
+          throw new Error(
+            "Validation failed. Make sure the email address isn't used yet!"
+          );
+        }
+        if (res.status !== 200 && res.status !== 201) {
+          console.log("Error!");
+          throw new Error("Creating a user failed!");
+        }
+        return res.json();
       })
-        .then((res) => {
-          if (res.status === 422) {
-            throw new Error(
-              "Validation failed. Make sure the email address isn't used yet!"
-            );
-          }
-          if (res.status !== 200 && res.status !== 201) {
-            console.log("Error!");
-            throw new Error("Creating a user failed!");
-          }
-          return res.json();
-        })
-        .then((resData) => {
-          console.log("Successfull",resData);
-          // dispatch(authenticationActions.setSignUp());
-          // history.push("/");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
+      .then((resData) => {
+        console.log("Successfull", resData);
+        navigate("/customer");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className={styles["Reg-container"]}>

@@ -1,9 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../customer/CustomerLogIn.module.css";
+import { authSliceActions } from "../../../store/auth-slice";
+import { useDispatch } from "react-redux";
 
 const RestaurentLogIn = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -41,7 +45,10 @@ const RestaurentLogIn = () => {
       .then((resData) => {
         console.log(resData);
         localStorage.setItem("restaurentToken", resData.token);
-        // dispatch(authenticationActions.setLoggedIn());
+        dispatch(
+          authSliceActions.setLoggedIn({ loggedIn: true, customer: false })
+        );
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -72,7 +79,9 @@ const RestaurentLogIn = () => {
             onInput={inputChangeHandler}
           />
         </div>
-        <button className={styles.btn} onClick={loginHandler}>Log In </button>
+        <button className={styles.btn} onClick={loginHandler}>
+          Log In{" "}
+        </button>
         <div className={styles.signup}>
           don't have an account ? sign up{" "}
           <Link to="/restaurent/signup">here</Link>
