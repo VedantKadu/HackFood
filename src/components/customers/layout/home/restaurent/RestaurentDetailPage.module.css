@@ -1,0 +1,12 @@
+.wrapper {
+  padding: 2% 7%;
+}
+.nav_wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.body_wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}

@@ -7,6 +7,8 @@ import styles from "./Navbar.module.css";
 
 // image imports
 import logo_img from "../../../../assets/hamburger.jpg";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 
 const Navbar = (props) => {
   const logIn = useSelector((state) => state.logIn.loggedIn);
@@ -40,18 +42,26 @@ const Navbar = (props) => {
                   <NavLink
                     activeClassName={styles.active}
                     className={styles["navbar-link"]}
-                    to="customer/bag"
+                    to="/bag"
                   >
-                    <span></span>
+                    <span>
+                      <LocalMallOutlinedIcon />
+                    </span>
                     Bag
                   </NavLink>
                 </div>
 
                 <div>
-                  <a href=" " className={styles["navbar-link"]}>
-                    <span></span>
+                  <NavLink
+                    to="/account"
+                    activeClassName={styles.active}
+                    className={styles["navbar-link"]}
+                  >
+                    <span>
+                      <AccountCircleOutlinedIcon />
+                    </span>
                     Account
-                  </a>
+                  </NavLink>
                 </div>
               </div>
             ) : (

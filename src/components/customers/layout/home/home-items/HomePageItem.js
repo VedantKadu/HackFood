@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./HomePageItem.module.css";
 
@@ -8,7 +9,7 @@ const HomePageItem = (props) => {
   );
 
   return (
-    <li className={styles["cards_item"]}>
+    <Link to={"/" + props.item.hotel_name} className={styles["cards_item"]}>
       <div className={styles["card"]}>
         <img className={styles["img"]} src={props.item.url} alt="" />
         <h2 className={styles["card__title"]}>{props.item.hotel_name}</h2>
@@ -22,7 +23,7 @@ const HomePageItem = (props) => {
           </div>
         </div>
       </div>
-    </li>
+    </Link>
   );
 };
 

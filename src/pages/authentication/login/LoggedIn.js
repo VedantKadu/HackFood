@@ -1,17 +1,11 @@
-import React, { Fragment } from "react";
-import { Route, Routes } from "react-router";
-import HomePage from "../../customer/home/HomePage";
-import Navbar from "../../../components/customers/layout/navbar/Navbar";
+import React from "react";
+import Customer from "../../customer/home/Customer";
+import { useSelector } from "react-redux";
 
 const LoggedIn = () => {
-  return (
-    <Fragment>
-      <Navbar />
-      <Routes>
-        <Route path="/" exact element={<HomePage />} />
-      </Routes>
-    </Fragment>
-  );
+  const customer = useSelector((state) => state.logIn.customer);
+
+  return customer && <Customer />;
 };
 
 export default LoggedIn;
