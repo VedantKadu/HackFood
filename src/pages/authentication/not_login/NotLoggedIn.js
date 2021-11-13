@@ -15,7 +15,7 @@ const NotLoggedIn = () => {
         <Route path="/" exact element={<Choice />} />
         <Route path="/customer/signup" element={<CustomerSignUp />} />
         <Route path="/customer" element={<CustomerLogIn />} />
-        <Route path="/restaurent/register" element={<RestaurentRegister />} />
+        <Route path="/restaurent/signup" element={<RestaurentRegister />} />
         <Route path="/restaurent" element={<RestaurentLogIn />} />
       </Routes>
     </Fragment>
