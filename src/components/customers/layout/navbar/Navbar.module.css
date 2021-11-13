@@ -51,7 +51,6 @@ header {
 .brandName {
   font-size: 24px;
   line-break: normal;
-  font-weight: 500;
   margin-left: 1rem;
   text-decoration: none;
   color: rgb(20, 20, 20);
@@ -209,102 +208,10 @@ header {
   padding: 0 5px;
 }
 
-/* Mobile Navbar */
-.mobile-nav {
-  background-color: #fff;
-  margin: 0;
-  position: fixed;
-  display: none;
-  flex-direction: row;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 4;
-  align-items: center;
-  justify-content: center;
-}
-
-.mobile-nav div {
-  padding: 5px 5px;
-  display: flex;
-  flex-direction: row;
-  width: 90%;
-}
-
-.mobile-links {
-  margin: 0 2px;
-  width: 33%;
-}
-
-.mobile-links:active {
-  background-color: rgba(228, 225, 225, 0.5);
-  border-radius: 20px;
-}
-
-.mobile-cart-icon {
-  width: 20px;
-  height: 20px;
-  margin: 0 2px;
-  color: rgb(90, 90, 90);
-}
-
-.mobile-home-icon {
-  width: 21px;
-  height: 21px;
-  margin-right: 2px;
-  color: rgb(90, 90, 90);
-}
-
-.mobile-account-icon {
-  width: 25px;
-  height: 25px;
-  color: rgb(104, 101, 101);
-}
-
-.active-mobile {
-  background-color: rgba(20, 110, 180, 0.1);
-  color: #146eb4;
-  border-radius: 20px;
-}
-
-@media only screen and (max-width: 1400px) {
-  .cart-modal {
-    left: 17%;
-  }
-}
-
-@media only screen and (max-width: 1300px) {
-  .cart-modal {
-    left: 15%;
-  }
-}
-
 /* Margin is removed on 1200px */
 @media only screen and (max-width: 1200px) {
   .header {
     padding: 0 3%;
-  }
-
-  .cart-modal {
-    left: 21%;
-  }
-}
-
-@media only screen and (max-width: 1100px) {
-  .cart-modal {
-    left: 18%;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .cart-modal {
-    left: 14%;
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .cart-modal {
-    left: 10%;
   }
 }
 
@@ -314,32 +221,14 @@ header {
     align-items: flex-start;
   }
 
-  .search {
-    width: 45vw;
-  }
-
-  .cart-modal {
-    left: 36%;
-  }
   .icon-container {
     display: none;
-  }
-  .mobile-nav {
-    display: flex;
   }
 }
 
 @media only screen and (max-width: 600px) {
-  .search {
-    width: 75vw;
-  }
-
   .navbar {
     padding-left: 1rem;
-  }
-
-  .header {
-    margin: 0;
   }
 
   .brand-name h1 {
@@ -354,10 +243,6 @@ header {
     width: 200px;
   }
 
-  .cart-modal {
-    left: 28%;
-  }
-
   .sticky {
     flex-direction: column;
   }
@@ -368,10 +253,5 @@ header {
 
   .options {
     display: flex;
-  }
-}
-@media only screen and (max-width: 500px) {
-  .cart-modal {
-    left: 23%;
   }
 }

@@ -1,12 +1,18 @@
 .wrapper {
   padding: 0 5%;
 }
+@media only screen and (max-width: 1200px) {
+  .wrapper {
+    padding: 0 3%;
+  }
+}
 .info_wrapper {
   padding-top: 30px;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
+
 .info {
   display: flex;
   flex-direction: column;
@@ -70,5 +76,52 @@
 }
 
 .image {
-  width: 51rem;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1200px) {
+  .info {
+    padding-left: 3rem;
+  }
+  .tagline2 {
+    font-size: 4rem;
+  }
+  .tagline1 {
+    font-size: 4rem;
+  }
+  .notes {
+    margin: 1.5rem 0;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .info {
+    padding-left: 0;
+  }
+  .btn_restaurent {
+    padding: 0.5rem 0.8rem;
+  }
+  .btn_customer {
+    padding: 0.5rem 0.8rem;
+  }
+  .notes {
+    margin: 1.5rem 0;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .info_wrapper {
+    flex-direction: column-reverse;
+  }
+  .image {
+    width: 90%;
+  }
+  .info {
+    padding: 2rem 0;
+  }
+  .tagline1 {
+    font-size: 4rem;
+  }
+  .tagline2 {
+    font-size: 4rem;
+  }
 }

@@ -4,7 +4,7 @@ const authSlice = createSlice({
   name: "authentication",
   initialState: {
     loggedIn: true,
-    customer: true,
+    customer: false,
   },
   reducers: {
     setLogged(state, action) {
