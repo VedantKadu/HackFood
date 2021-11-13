@@ -2,18 +2,17 @@ import React from "react";
 import styles from "./ProductsTable.module.css";
 import Item from "../../../restaurent/orders/OrderPageItems/OrderTableItem";
 import ProductItem from "./ProductTableItem";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const ProductsTable = () => {
-  // const filteredData = useSelector((state) => state.Productsearch.filteredData);
-  // const SearchData = useSelector((state) => state.Productsearch.searchData);
-  // const searchedWord = useSelector((state) => state.Productsearch.enteredWord);
+  const filteredData = useSelector((state) => state.productSearch.filteredData);
+  const SearchData = useSelector((state) => state.productSearch.searchData);
+  const searchedWord = useSelector((state) => state.productSearch.enteredWord);
 
-  // let productlist;
-  // if (searchedWord === "") productlist = filteredData;
-  // else productlist = SearchData;
+  let productlist;
+  if (searchedWord === "") productlist = filteredData;
+  else productlist = SearchData;
 
-  // console.log(productlist);
   return (
     <div className={styles.table}>
       <div className={styles.header}>
@@ -26,9 +25,9 @@ const ProductsTable = () => {
         <Item className={styles.edit}>Edit</Item>
       </div>
       <div>
-        {/* {productlist.map((item) => {
+        {productlist.map((item) => {
           return <ProductItem item={item} key={item._id} />;
-        })} */}
+        })}
       </div>
     </div>
   );

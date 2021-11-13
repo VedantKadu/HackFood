@@ -4,77 +4,77 @@ import styles from "./ProductTableItem.module.css";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-// import { useState } from "react";
-// import { ProductsearchActions } from "../../../Store/ProductSearch-slice";
-// import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { ProductsearchActions } from "../../../../store/ProductSearch-slice";
+import { useDispatch } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const ProductItem = (props) => {
-  const location = useLocation();
-  // const dispatch = useDispatch();
+
+  const dispatch = useDispatch();
   const productId = props.item._id;
 
-  // let status = props.item.status;
-  // const [checked, setChecked] = useState(props.item.status);
-  // const handleChange = (event) => {
-  //   setChecked(event.target.checked);
-  //   status = !status;
-  //   updateHandler(event);
-  // };
+  let status = props.item.status;
+  const [checked, setChecked] = useState(props.item.status);
 
-  // const updateHandler = (e) => {
-  //   e.preventDefault();
-  //   let url = "http://localhost:8080/products/" + productId;
-  //   let method = "POST";
-  //   fetch(url, {
-  //     method: method,
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + localStorage.getItem("token"),
-  //     },
-  //     body: JSON.stringify({
-  //       status: status,
-  //     }),
-  //   })
-  //     .then((res) => {
-  //       if (res.status !== 200 && res.status !== 201) {
-  //         throw new Error("Creating or editing a post failed!");
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((resData) => {
-  //       console.log(resData);
-  //       dispatch(ProductsearchActions.changeReload());
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    status = !status;
+    updateHandler(event);
+  };
 
-  // const deleteHandler = () => {
-  //   let url = "http://localhost:8080/products/delete/" + productId;
-  //   let method = "DELETE";
-  //   fetch(url, {
-  //     method: method,
-  //     headers: {
-  //       Authorization: "Bearer " + localStorage.getItem("token"),
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.status !== 200 && res.status !== 201) {
-  //         throw new Error("Delete a post failed!");
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((resData) => {
-  //       console.log(resData);
-  //       dispatch(ProductsearchActions.changeReload());
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const updateHandler = (e) => {
+    e.preventDefault();
+    let url = "http://localhost:8080/restaurent/" + productId;
+    let method = "POST";
+    fetch(url, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("restaurentToken"),
+      },
+      body: JSON.stringify({
+        status: status,
+      }),
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Creating or editing a post failed!");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        dispatch(ProductsearchActions.changeReload());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteHandler = () => {
+    let url = "http://localhost:8080/restaurent/delete/" + productId;
+    let method = "DELETE";
+    fetch(url, {
+      method: method,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("restaurentToken"),
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Delete a post failed!");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        console.log(resData);
+        dispatch(ProductsearchActions.changeReload());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className={styles.content}>
@@ -85,7 +85,7 @@ const ProductItem = (props) => {
       </div>
       <div className={styles["name-container"]}>
         <span className={styles.wrapper}>
-          <p className={styles.name}>{props.item.dish_name}</p>
+          <p className={styles.name}>{props.item.dishName}</p>
         </span>
       </div>
       <div className={styles["category-container"]}>
@@ -106,26 +106,31 @@ const ProductItem = (props) => {
       <div className={styles["status-container"]}>
         <span className={styles.wrapper}>
           <FormGroup>
-            <FormControlLabel control={<Switch defaultChecked />} label="" />
+            <FormControlLabel
+              checked={checked}
+              onChange={handleChange}
+              control={<Switch defaultChecked />}
+              label=""
+            />
           </FormGroup>
         </span>
-        {/* {checked ? (
+        {checked ? (
           <span className={styles["in-stock"]}>In Stock</span>
         ) : (
           <span className={styles["out-stock"]}>Out of Stock</span>
-        )} */}
+        )}
       </div>
       <div className={styles["edit-container"]}>
         <span className={styles.wrapper}>
           <Link
-            to={`${location.pathname}/edit/${productId}`}
+            to={"/edit/"+productId}
             className={styles.edit}
           >
             <EditIcon />
           </Link>
         </span>
         <span className={styles.wrapper}>
-          <div className={styles.delete}>
+          <div className={styles.delete} onClick={deleteHandler}>
             <DeleteIcon />
           </div>
         </span>
