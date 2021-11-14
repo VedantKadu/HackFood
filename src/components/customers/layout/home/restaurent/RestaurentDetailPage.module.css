@@ -1,20 +1,104 @@
-.wrapper {
-  padding: 2% 7%;
-}
 .nav_wrapper {
+  margin-top: 2rem;
+  padding: 0 5%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  align-items: center;
+  background-color: #282c3f;
+  color: #fff;
 }
 .res_image {
-  width: 200px;
-  /* display: none; */
+  padding: 1rem 2rem;
+  width: 20%;
 }
 .image {
-  width: 200px;
+  width: 100%;
 }
+.res_info {
+  font-family: sans-serif;
+  margin-left: 1rem;
+}
+.resName {
+  font-size: 2.5rem;
+}
+.resAddress {
+  margin: 1rem 0;
+  color: #9b9ca0;
+}
+.resBill {
+  color: #9b9ca0;
+}
+
 .body_wrapper {
+  padding: 2% 5%;
   display: flex;
   flex-direction: row;
   width: 100%;
+}
+.meals {
+  width: 70%;
+}
+
+@media only screen and (max-width: 1200px) {
+  .res_image {
+    width: 25%;
+  }
+  .nav_wrapper {
+    padding: 0 3%;
+  }
+  .body_wrapper {
+    padding: 2% 3%;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .res_image {
+    padding: 1rem;
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .res_image {
+    padding: 0.5rem;
+    width: 40%;
+  }
+  .meals {
+    width: 100%;
+  }
+  .cart {
+    display: none;
+  }
+  .resName {
+    font-size: 2rem;
+  }
+  .resBill {
+    font-size: 1rem;
+  }
+  .resAddress {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 50px) {
+  .resName {
+    font-size: 1.5rem;
+  }
+  .resBill {
+    font-size: 0.8rem;
+  }
+  .resAddress {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .resName {
+    font-size: 1.2rem;
+  }
+  .resBill {
+    font-size: 0.8rem;
+  }
+  .resAddress {
+    font-size: 0.8rem;
+  }
 }

@@ -27,10 +27,10 @@ const RestaurentDetailPage = () => {
           <div className={styles.resName}>{restaurent.restaurentName}</div>
           <div className={styles.resAddress}>
             {restaurent.address.locality}
-            {restaurent.address.street}
+            {`, ${restaurent.address.street}`}
           </div>
           <div className={styles.resBill}>
-            Minimum Amount {restaurent.minBill}
+            Minimum Bill Amount :- {restaurent.minBill}
           </div>
         </div>
       </div>
