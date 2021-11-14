@@ -37,6 +37,8 @@ const Customer = () => {
       {restaurentList.length > 0 ? (
         <Routes>
           <Route path="/" exact element={<HomePage />} />
+          <Route path="/bag" exact element={<HomePage />} />
+          <Route path="/account" exact element={<HomePage />} />
           <Route path="/:restaurent_id" element={<RestaurentDetailPage />} />
         </Routes>
       ) : (
