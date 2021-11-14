@@ -1,17 +1,16 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./ProductTableItem.module.css";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { useState } from "react";
-import { ProductsearchActions } from "../../../../store/ProductSearch-slice";
+import { productSearchActions } from "../../../../store/productSearch-slice";
 import { useDispatch } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const ProductItem = (props) => {
-
   const dispatch = useDispatch();
   const productId = props.item._id;
 
@@ -45,7 +44,7 @@ const ProductItem = (props) => {
         return res.json();
       })
       .then((resData) => {
-        dispatch(ProductsearchActions.changeReload());
+        dispatch(productSearchActions.changeReload());
       })
       .catch((err) => {
         console.log(err);
@@ -69,7 +68,7 @@ const ProductItem = (props) => {
       })
       .then((resData) => {
         console.log(resData);
-        dispatch(ProductsearchActions.changeReload());
+        dispatch(productSearchActions.changeReload());
       })
       .catch((err) => {
         console.log(err);
@@ -122,10 +121,7 @@ const ProductItem = (props) => {
       </div>
       <div className={styles["edit-container"]}>
         <span className={styles.wrapper}>
-          <Link
-            to={"/edit/"+productId}
-            className={styles.edit}
-          >
+          <Link to={"/edit/" + productId} className={styles.edit}>
             <EditIcon />
           </Link>
         </span>

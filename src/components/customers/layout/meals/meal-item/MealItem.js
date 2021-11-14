@@ -1,29 +1,29 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import styles from "./MealItem.module.css";
-import AddSubtractButton from "../../UI/AddSubtractButton";
-import { cartActions } from "../../../Store/cart-slice";
+import AddSubtractButton from "../../../ui/AddSubtractButton";
+import { cartSliceActions } from "../../../../../store/cart-slice";
 
 // Image imports
-import veganImage from "../../../assets/vegetarian_mark.png";
-import nonvegImg from "../../../assets/non_vegetarian_mark.png";
+import veganImage from "../../../../../assets/vegetarian_mark.png";
+import nonvegImg from "../../../../../assets/non_vegetarian_mark.png";
 
 const MealItem = (props) => {
   const dispatch = useDispatch();
   const addCartItemHandler = () => {
     dispatch(
-      cartActions.addItem({
-        id: props.item.id,
-        name: props.item.name,
-        url:props.item.url,
-        price: props.item.price,
+      cartSliceActions.addItem({
+        _id: props.item._id,
+        dishName: props.item.dishName,
+        url: props.item.url,
+        price: +props.item.price,
         discount: props.item.discount,
-        hotel_name: props.item.hotel_name,
+        restaurent: props.item.restaurent,
       })
     );
   };
   const removeCartItemHandler = () => {
-    dispatch(cartActions.removeItem(props.item.id));
+    dispatch(cartSliceActions.removeItem(props.item._id));
   };
 
   const selling_price = Math.ceil(
@@ -45,7 +45,7 @@ const MealItem = (props) => {
       </div>
       <div className={styles["item-contents"]}>
         <div className={styles["meal-info"]}>
-          {props.item.veg ? (
+          {props.item.type === "Veg" ? (
             <img
               className={styles["veg-image"]}
               src={veganImage}
@@ -58,7 +58,7 @@ const MealItem = (props) => {
               alt="meal-type"
             />
           )}
-          <span>{props.item.name}</span>
+          <span>{props.item.dishName}</span>
         </div>
         <div className={styles.description}>{props.item.description}</div>
         <div className={styles["amount-container"]}>
@@ -74,7 +74,7 @@ const MealItem = (props) => {
             imageStyles={styles["add-subtract-img"]}
             onAddItem={addCartItemHandler}
             onRemoveItem={removeCartItemHandler}
-            id={props.item.id}
+            _id={props.item._id}
           />
         </div>
       </div>

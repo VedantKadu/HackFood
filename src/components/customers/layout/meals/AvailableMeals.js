@@ -1,20 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import MealItem from "./MealsItem/MealItem";
-import dummyList from "../Meals/DummyMeals";
+
+import MealItem from "./meal-item/MealItem";
 
 const AvailableMeals = (props) => {
-  const hotelId = useSelector((state) => state.hotel.hotel_id);
-  const veg = useSelector((state) => state.vegonly.veg);
+  // const veg = useSelector((state) => state.vegonly.veg);
   // const Searchitems = useSelector((state) => state.searchResult.items);
   // const Searchitemschange = useSelector((state) => state.searchResult.change);
 
-  var requiredDishes = dummyList.find(
-    (hotel) => hotel.hotel_id === hotelId
-  ).dishes;
-  if (veg) {
-    requiredDishes = requiredDishes.filter((item) => item.veg === true);
-  }
+  var requiredDishes = props.dishes;
+  // if (veg) {
+  //   requiredDishes = requiredDishes.filter((item) => item.veg === true);
+  // }
   // if(Searchitemschange){
   //   // console.log(Searchitems);
   //   requiredDishes=Searchitems;
@@ -26,7 +22,7 @@ const AvailableMeals = (props) => {
         <p>Opps!!! No Veg Items In This Restaurent </p>
       )}
       {requiredDishes.map((item) => {
-        return <MealItem item={item} key={item.id} />;
+        return <MealItem item={item} key={item._id} />;
       })}
     </React.Fragment>
   );

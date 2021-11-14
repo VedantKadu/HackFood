@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 import { FormLabel } from "@mui/material";
-import { ProductsearchActions } from "../../../store/ProductSearch-slice";
+import { productSearchActions } from "../../../store/productSearch-slice";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -74,7 +74,7 @@ function NewProduct() {
       method: method,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("restaurentToken"),
+        Authorization: "Bearer " + localStorage.getItem("restaurentToken"),
       },
       body: JSON.stringify({
         dishName: name,
@@ -92,7 +92,7 @@ function NewProduct() {
       })
       .then((resData) => {
         console.log(resData);
-        dispatch(ProductsearchActions.changeReload());
+        dispatch(productSearchActions.changeReload());
         navigate("/");
       })
       .catch((err) => {
@@ -107,7 +107,6 @@ function NewProduct() {
           <KeyboardBackspaceIcon fontSize="large" onClick={handleBackPress} />
           <span className={styles["heading"]}>Add New Product</span>
         </div>
-
       </header>
 
       <div className={styles["newprod-wrap"]}>

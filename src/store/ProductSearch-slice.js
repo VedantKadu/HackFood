@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const ProductsearchSlice = createSlice({
+const productSearchSlice = createSlice({
   name: "search Product item",
   initialState: {
     enteredWord: "",
@@ -19,9 +19,9 @@ const ProductsearchSlice = createSlice({
       state.searchData = action.payload;
     },
     changeReload(state, action) {
-      state.reload = !state.reload ;
+      state.reload = !state.reload;
     },
   },
 });
-export const ProductsearchActions = ProductsearchSlice.actions;
-export default ProductsearchSlice;
+export const productSearchActions = productSearchSlice.actions;
+export default productSearchSlice;

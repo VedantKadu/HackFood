@@ -4,6 +4,14 @@
 .nav_wrapper {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+}
+.res_image {
+  width: 200px;
+  /* display: none; */
+}
+.image {
+  width: 200px;
 }
 .body_wrapper {
   display: flex;

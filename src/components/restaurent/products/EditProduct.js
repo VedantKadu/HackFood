@@ -11,7 +11,7 @@ import { Button, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 import { FormLabel } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { ProductsearchActions } from "../../../store/ProductSearch-slice";
+import { productSearchActions } from "../../../store/productSearch-slice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -103,7 +103,7 @@ function EditProduct() {
       })
       .then((resData) => {
         navigate("/");
-        dispatch(ProductsearchActions.changeReload());
+        dispatch(productSearchActions.changeReload());
       })
       .catch((err) => {
         console.log(err);

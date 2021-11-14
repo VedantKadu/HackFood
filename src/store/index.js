@@ -1,15 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import AccountModalSlice from "./AccountModal-slice";
+import accountModalSlice from "./accountModal-slice";
 import authSlice from "./auth-slice";
-import ProductsearchSlice from "./ProductSearch-slice";
-import RestaurentSlice from "./RestaurentData-slice";
+import productSearchSlice from "./productSearch-slice";
+import restaurentSlice from "./restaurentData-slice";
+import cartSlice from "./cart-slice";
 
 const Store = configureStore({
   reducer: {
     logIn: authSlice.reducer,
-    productSearch: ProductsearchSlice.reducer,
-    AccountModal: AccountModalSlice.reducer,
-    restaurent: RestaurentSlice.reducer,
+    productSearch: productSearchSlice.reducer,
+    accountModal: accountModalSlice.reducer,
+    restaurent: restaurentSlice.reducer,
+    cart: cartSlice.reducer,
   },
 });
 

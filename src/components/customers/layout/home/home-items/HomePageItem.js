@@ -6,8 +6,9 @@ import styles from "./HomePageItem.module.css";
 const HomePageItem = (props) => {
   const url =
     "https://www.thespruceeats.com/thmb/kFPbPBvit_2pnmUt8lhABceAM-I=/3329x3329/smart/filters:no_upscale()/goat-mutton-curry-1957594-hero-01-afaf638173cd47d595c7ad99a018cf01.jpg";
+
   return (
-    <Link to={"/" + props.item.restaurentName} className={styles["cards_item"]}>
+    <Link to={"/" + props.item._id} className={styles["cards_item"]}>
       <div className={styles["card"]}>
         <img className={styles["img"]} src={url} alt="" />
         <h2 className={styles["card__title"]}>{props.item.restaurentName}</h2>

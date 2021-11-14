@@ -2,15 +2,16 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styles from "./AddSubtractButton.module.css";
 import Button from "./Button";
-import minusImage from "../../assets/Minus.svg";
-import plusImage from "../../assets/Plus.svg";
+import minusImage from "../../../assets/Minus.svg";
+import plusImage from "../../../assets/Plus.svg";
 
 const AddSubtractButton = (props) => {
   const cartItems = useSelector((state) => state.cart.items);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   var incart = false;
   if (totalQuantity > 0) {
-    incart = cartItems.find((item) => item.id === props.id);
+    incart = cartItems.find((item) => item._id === props._id);
+    console.log(cartItems);
   }
 
   return (

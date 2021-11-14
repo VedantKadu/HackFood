@@ -4,7 +4,7 @@ import Header from "../../../components/restaurent/ui/Header";
 import ProductsTable from "../../../components/restaurent/products/ProductPageItems/ProductsTable";
 import { Fragment } from "react";
 
-import { ProductsearchActions } from "./../../../store/ProductSearch-slice";
+import { productSearchActions } from "../../../store/productSearch-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
@@ -23,13 +23,13 @@ function ProductPage() {
 
   const handleFilter = (event) => {
     const searchedWord = event.target.value;
-    dispatch(ProductsearchActions.setEnteredWord(searchedWord));
+    dispatch(productSearchActions.setEnteredWord(searchedWord));
     const newFilter = productlist.filter((value) => {
       return value.dishName.toLowerCase().includes(searchedWord.toLowerCase());
     });
 
     if (searchedWord !== "") {
-      dispatch(ProductsearchActions.changeSearchData(newFilter));
+      dispatch(productSearchActions.changeSearchData(newFilter));
     }
   };
 
@@ -46,7 +46,7 @@ function ProductPage() {
         return res.json();
       })
       .then((resData) => {
-        dispatch(ProductsearchActions.changeFilteredData(resData.products));
+        dispatch(productSearchActions.changeFilteredData(resData.products));
       })
       .catch((err) => {
         console.log(err);
@@ -55,7 +55,7 @@ function ProductPage() {
 
   const reloadPage = () => {
     window.location.reload();
-    dispatch(ProductsearchActions.changeReload());
+    dispatch(productSearchActions.changeReload());
   };
 
   return (
@@ -75,11 +75,8 @@ function ProductPage() {
               ></input>
             </div>
             <div className={styles["product-view"]}>
-              <span>
-
-              </span>
-              <span>
-              </span>
+              <span></span>
+              <span></span>
               <div className={styles["btn"]}>
                 <div className={styles["button"]} onClick={addNewProduct}>
                   Add New Product

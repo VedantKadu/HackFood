@@ -5,7 +5,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
-import { AccountModalActions } from "../../../store/AccountModal-slice";
+import { accountModalActions } from "../../../store/accountModal-slice";
 import Switch from "./Switch";
 import { authSliceActions } from "../../../store/auth-slice";
 import { useNavigate } from "react-router";
@@ -17,7 +17,7 @@ const Overley = (props) => {
 
   const logOutHandler = () => {
     localStorage.removeItem("restaurentToken");
-    dispatch(authSliceActions.setLoggedIn({loggedIn:false,customer: true}));
+    dispatch(authSliceActions.setLoggedIn({ loggedIn: false, customer: true }));
     history("/");
   };
   return (
@@ -39,7 +39,7 @@ const Overley = (props) => {
           </div>
           <div className={styles["main-items"]} onClick={logOutHandler}>
             <LogoutIcon fontSize="large" />
-            <p className={styles.text} >Sign Out </p>
+            <p className={styles.text}>Sign Out </p>
           </div>
         </div>
       </div>
@@ -50,10 +50,12 @@ const Backdrop = (props) => {
   const dispatch = useDispatch();
 
   const AccountModalHandler = () => {
-    dispatch(AccountModalActions.setview());
+    dispatch(accountModalActions.setview());
   };
 
-  return <div className={styles["backdrop"]} onClick={AccountModalHandler}></div>;
+  return (
+    <div className={styles["backdrop"]} onClick={AccountModalHandler}></div>
+  );
 };
 
 const AccountModal = (props) => {

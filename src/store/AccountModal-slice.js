@@ -6,10 +6,10 @@ const AccountModalSlice = createSlice({
     view: false,
   },
   reducers: {
-    setview(state) {
+    setView(state) {
       state.view = !state.view;
     },
   },
 });
-export const AccountModalActions = AccountModalSlice.actions;
+export const accountModalActions = AccountModalSlice.actions;
 export default AccountModalSlice;
