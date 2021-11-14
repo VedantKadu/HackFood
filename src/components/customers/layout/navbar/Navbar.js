@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -13,6 +13,43 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
 const Navbar = (props) => {
   const logIn = useSelector((state) => state.logIn.loggedIn);
+  // const [location, setLocation] = useState({
+  //   latitude: "",
+  //   longitude: "",
+  //   address: "",
+  // });
+
+  // function getLocation() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.watchPosition(getCoordinate, showError);
+  //   } else {
+  //     alert("Geolocation is not supported by this browser.");
+  //   }
+  // }
+
+  // function getCoordinate(position) {
+  //   setLocation({
+  //     latitude: position.coords.latitude,
+  //     longitude: position.coords.longitude,
+  //   });
+  // }
+  console.log(location);
+  function showError(error) {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        alert("The request to get user location timed out.");
+        break;
+      case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.");
+        break;
+    }
+  }
 
   return (
     <React.Fragment>
