@@ -5,11 +5,14 @@ import RestaurentDetailPage from "../../../components/customers/layout/home/rest
 import { Route, Routes } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { RestaurentDataActions } from "../../../store/restaurentData-slice";
+import { fetchCartData, sendCartData } from "../../../store/cartActions";
+
+let isInitial = true;
 
 const Customer = () => {
   const dispatch = useDispatch();
   const restaurentList = useSelector((state) => state.restaurent.hotels);
-  const cart = useSelector((state) => state.cart.items);
+  const cart = useSelector((state) => state.cart);
   console.log(cart);
 
   useEffect(() => {
@@ -31,6 +34,21 @@ const Customer = () => {
         console.log(err);
       });
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
+  }, [cart, dispatch]);
+
   return (
     <Fragment>
       <Navbar />
