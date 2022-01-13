@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import HomePage from "./HomePage";
+import Bag from "./../Bag/Bag";
 import Navbar from "../../../components/customers/layout/navbar/Navbar";
 import RestaurentDetailPage from "../../../components/customers/layout/home/restaurent/RestaurentDetailPage";
 import { Route, Routes } from "react-router";
@@ -55,7 +56,7 @@ const Customer = () => {
       {restaurentList.length > 0 ? (
         <Routes>
           <Route path="/" exact element={<HomePage />} />
-          <Route path="/bag" exact element={<HomePage />} />
+          <Route path="/bag" exact element={<Bag />} />
           <Route path="/account" exact element={<HomePage />} />
           <Route path="/:restaurent_id" element={<RestaurentDetailPage />} />
         </Routes>

@@ -1,26 +1,25 @@
 import { Fragment } from "react";
 import { useDispatch } from "react-redux";
-import { cartActions } from "../../../Store/cart-slice";
-import AddSubtractButton from "../AddSubtractButton";
+import { cartSliceActions } from "../../../store/cart-slice";
+import AddSubtractButton from "./../../../components/customers/ui/AddSubtractButton";
 import styles from "./BagItem.module.css";
-
-
 
 const BagItem = (props) => {
   const dispatch = useDispatch();
   const addCartItemHandler = () => {
     dispatch(
-      cartActions.addItem({
-        id: props.id,
-        name: props.name,
-        price: props.price,
+      cartSliceActions.addItem({
+        _id: props._id,
+        dishName: props.dishName,
+        url: props.url,
+        price: +props.price,
         discount: props.discount,
-        hotel_name: props.hotel_name,
+        restaurent: props.restaurent,
       })
     );
   };
   const removeCartItemHandler = () => {
-    dispatch(cartActions.removeItem(props.id));
+    dispatch(cartSliceActions.removeItem(props._id));
   };
 
   const sellingPrice = Math.ceil(
@@ -33,7 +32,7 @@ const BagItem = (props) => {
           <img src={props.url} alt="meal-img" />
         </div>
         <div className={styles["content-wrapper"]}>
-          <h4>{props.name}</h4>
+          <h4>{props.dishName}</h4>
           <div>
             <p>
               ₹{sellingPrice}
@@ -41,7 +40,7 @@ const BagItem = (props) => {
             </p>
             <AddSubtractButton
               className={styles["addsubtract-button"]}
-              id={props.id}
+              _id={props._id}
               onAddItem={addCartItemHandler}
               onRemoveItem={removeCartItemHandler}
             />

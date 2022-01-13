@@ -2,22 +2,28 @@ import React, { Fragment } from "react";
 import BagItem from "./BagItem";
 import BagTotal from "./BagTotal";
 import styles from "./Bag.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { cartSliceActions } from "../../../store/cart-slice";
 
 // Image Imports
-import cartEmpty_img from "../../../assets/cart-empty.svg";
 
 const Bag = () => {
-  const totalQuantity=1;
-
+  const bagItems = useSelector((state) => state.cart.items);
+  const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const dispatch = useDispatch();
+  const clearBagHandler = () => {
+    dispatch(cartSliceActions.clearBag());
+  };
   return (
     <Fragment>
       {totalQuantity === 0 ? (
         <div className={styles["empty-bag"]}>
           <div>
-            <img src={cartEmpty_img} alt="cart is empty" />
+            {/* <img src={cartEmpty_img} alt="cart is empty" /> */}
             <h4>Your bag is empty</h4>
             <p>Looks like you haven’t made your choice yet</p>
-            <button onClick={takeToHomePage}>Back to homepage</button>
+            {/* <button onClick={takeToHomePage}>Back to homepage</button> */}
           </div>
         </div>
       ) : (
@@ -39,14 +45,14 @@ const Bag = () => {
             >
               {bagItems.map((item) => (
                 <BagItem
-                  key={item.id}
+                  key={item._id}
                   url={item.url}
-                  name={item.name}
+                  dishName={item.dishName}
                   quantity={item.quantity}
                   price={item.price}
                   discount={item.discount}
-                  id={item.id}
-                  hotel_name={item.hotel_name}
+                  _id={item._id}
+                  restaurent={item.restaurent}
                 />
               ))}
             </div>

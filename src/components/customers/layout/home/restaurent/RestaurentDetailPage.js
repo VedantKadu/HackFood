@@ -10,6 +10,7 @@ import Meals from "../../../../../components/customers/layout/meals/Meals";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { filterActions } from "../../../../../store/filterSlice";
+import Cart from "../../bag/Cart";
 
 const RestaurentDetailPage = () => {
   const url =
@@ -22,6 +23,7 @@ const RestaurentDetailPage = () => {
   const restaurentsList = useSelector((state) => state.restaurent.hotels);
   const veg = useSelector((state) => state.filter.filter.veg);
   const wordEntered = useSelector((state) => state.filter.filter.word);
+
   const restaurent = restaurentsList.find(
     (restaurent) => restaurent._id === restaurentId
   );
@@ -90,7 +92,9 @@ const RestaurentDetailPage = () => {
         <div className={styles.meals}>
           <Meals dishes={restaurent.dishes} />
         </div>
-        <div className={styles.cart}>cart</div>
+        <div className={styles.cart}>
+          <Cart />
+        </div>
       </div>
     </div>
   );
