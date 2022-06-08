@@ -4,6 +4,7 @@ import authSlice from "./auth-slice";
 import productSearchSlice from "./productSearch-slice";
 import restaurentSlice from "./restaurentData-slice";
 import cartSlice from "./cart-slice";
+import filterSlice from "./filterSlice";
 
 const Store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const Store = configureStore({
     accountModal: accountModalSlice.reducer,
     restaurent: restaurentSlice.reducer,
     cart: cartSlice.reducer,
+    filter: filterSlice.reducer,
   },
 });
 

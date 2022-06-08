@@ -1,20 +1,22 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import MealItem from "./meal-item/MealItem";
 
 const AvailableMeals = (props) => {
-  // const veg = useSelector((state) => state.vegonly.veg);
-  // const Searchitems = useSelector((state) => state.searchResult.items);
+  const veg = useSelector((state) => state.filter.filter.veg);
+  const word = useSelector((state) => state.filter.filter.word);
   // const Searchitemschange = useSelector((state) => state.searchResult.change);
 
   var requiredDishes = props.dishes;
-  // if (veg) {
-  //   requiredDishes = requiredDishes.filter((item) => item.veg === true);
-  // }
-  // if(Searchitemschange){
-  //   // console.log(Searchitems);
-  //   requiredDishes=Searchitems;
-  // }
+  if (word !== "") {
+    requiredDishes = requiredDishes.filter((value) => {
+      return value.dishName.toLowerCase().includes(word.toLowerCase());
+    });
+  }
+  if (veg) {
+    requiredDishes = requiredDishes.filter((item) => item.type === "Veg");
+  }
 
   return (
     <React.Fragment>

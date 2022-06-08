@@ -2,11 +2,11 @@ import React from "react";
 import "./Cart.css";
 import CartItem from "./CartItem";
 import { useSelector, useDispatch } from "react-redux";
-import { cartActions } from "../../Store/cart-slice";
-import BagTotal from "../BagTotal";
+import { cartSliceActions } from "../../../../store/cart-slice";
+import BagTotal from "../bag/BagTotal";
 
 // Image Imports
-import cartEmpty_img from "../../assets/cart-empty.svg";
+// import cartEmpty_img from "../../../../assets/";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
@@ -14,7 +14,7 @@ const Cart = () => {
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const dispatch = useDispatch();
   const clearBagHandler = () => {
-    dispatch(cartActions.clearBag());
+    dispatch(cartSliceActions.clearBag());
   };
 
   return (
@@ -35,20 +35,20 @@ const Cart = () => {
       >
         {totalQuantity === 0 ? (
           <div className="empty-cart">
-            <img src={cartEmpty_img} alt="cart is empty" />
+            {/* <img src={cartEmpty_img} alt="cart is empty" /> */}
             <h4>Your bag is empty</h4>
             <p>Looks like you haven’t made your choice yet</p>
           </div>
         ) : (
           cartItems.map((item) => (
             <CartItem
-              key={item.id}
-              name={item.name}
+              key={item._id}
+              dishName={item.name}
               quantity={item.quantity}
               price={item.price}
               discount={item.discount}
-              id={item.id}
-              hotel_name={item.hotel_name}
+              _id={item._id}
+              restaurent={item.restaurent}
             />
           ))
         )}

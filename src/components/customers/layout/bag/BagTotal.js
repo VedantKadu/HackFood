@@ -1,19 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import "./BagTotal.css";
+import "./BagTotal.module.css";
 
 const BagTotal = (props) => {
-  const history = useHistory();
+  // const history = useHistory();
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   var grandTotal = totalAmount;
   if (totalAmount < 300) grandTotal += 20;
 
-  const checkOutHandler = () => {
-    history.push("/bag");
-  };
+  // const checkOutHandler = () => {
+  //   history.push("/bag");
+  // };
   return (
-      <div className="wrapper">
+    <div className="wrapper">
       <div className="cart-item-total">
         <div className="item-total">
           <span>Item Total</span>
@@ -42,13 +42,10 @@ const BagTotal = (props) => {
           <span>₹{grandTotal}</span>
         </div>
         <div className="check-btn">
-          <div className="checkout" onClick={checkOutHandler}>
-            Proceed To Checkout
-          </div>
+          <div className="checkout">Proceed To Checkout</div>
         </div>
       </div>
-      </div>
-
+    </div>
   );
 };
 

@@ -33,7 +33,7 @@ const Navbar = (props) => {
   //     longitude: position.coords.longitude,
   //   });
   // }
-  console.log(location);
+  // console.log(location);
   function showError(error) {
     switch (error.code) {
       case error.PERMISSION_DENIED:

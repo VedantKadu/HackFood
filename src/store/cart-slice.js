@@ -21,7 +21,7 @@ const cartSlice = createSlice({
         state.totalAmount +
         (newItem.price - (newItem.price * newItem.discount) / 100);
       if (!existingItem) {
-        if (state.totalQuantity === 0) {
+        if (+state.totalQuantity === 0) {
           state.totalQuantity++;
           state.changed = true;
           state.items.push({

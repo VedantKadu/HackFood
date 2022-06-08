@@ -1,15 +1,19 @@
 import React, { Fragment, useEffect } from "react";
 import HomePage from "./HomePage";
+import Bag from "./../Bag/Bag";
 import Navbar from "../../../components/customers/layout/navbar/Navbar";
 import RestaurentDetailPage from "../../../components/customers/layout/home/restaurent/RestaurentDetailPage";
 import { Route, Routes } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { RestaurentDataActions } from "../../../store/restaurentData-slice";
+import { fetchCartData, sendCartData } from "../../../store/cartActions";
+
+let isInitial = true;
 
 const Customer = () => {
   const dispatch = useDispatch();
   const restaurentList = useSelector((state) => state.restaurent.hotels);
-  const cart = useSelector((state) => state.cart.items);
+  const cart = useSelector((state) => state.cart);
   console.log(cart);
 
   useEffect(() => {
@@ -31,12 +35,29 @@ const Customer = () => {
         console.log(err);
       });
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
+  }, [cart, dispatch]);
+
   return (
     <Fragment>
       <Navbar />
       {restaurentList.length > 0 ? (
         <Routes>
           <Route path="/" exact element={<HomePage />} />
+          <Route path="/bag" exact element={<Bag />} />
+          <Route path="/account" exact element={<HomePage />} />
           <Route path="/:restaurent_id" element={<RestaurentDetailPage />} />
         </Routes>
       ) : (
